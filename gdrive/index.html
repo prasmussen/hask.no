@@ -4,12 +4,1801 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>gdrive</title>
+    <style>
+      .octicon {
+        display: none;
+      }
+    </style>
   </head>
   <body>
     <h1>Gdrive</h1>
-    <h3>Google Drive CLI</h3>
-    <p>
-      <a href="https://github.com/prasmussen/gdrive">More info on github</a>
-    </p>
+    <h3>A command line utility for interacting with Google Drive.</h3>
+    <section>
+      <p>
+        <a href="https://github.com/prasmussen/gdrive">See on github</a>
+      </p>
+      <p>
+        <a href="/privacy-policy">Privacy policy</a>
+      </p>
+    </section>
+
+
+<article class="markdown-body entry-content container-lg" itemprop="text">
+  <h2>
+    <a id="user-content-usage" class="anchor" aria-hidden="true" href="#usage"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Usage
+  </h2>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>
+    gdrive [global] list [options]                                 List files
+    gdrive [global] download [options] &lt;fileId&gt;                    Download file or directory
+    gdrive [global] download query [options] &lt;query&gt;               Download all files and directories matching query
+    gdrive [global] upload [options] &lt;path&gt;                        Upload file or directory
+    gdrive [global] upload - [options] &lt;name&gt;                      Upload file from stdin
+    gdrive [global] update [options] &lt;fileId&gt; &lt;path&gt;               Update file, this creates a new revision of the file
+    gdrive [global] info [options] &lt;fileId&gt;                        Show file info
+    gdrive [global] mkdir [options] &lt;name&gt;                         Create directory
+    gdrive [global] share [options] &lt;fileId&gt;                       Share file or directory
+    gdrive [global] share list &lt;fileId&gt;                            List files permissions
+    gdrive [global] share revoke &lt;fileId&gt; &lt;permissionId&gt;           Revoke permission
+    gdrive [global] delete [options] &lt;fileId&gt;                      Delete file or directory
+    gdrive [global] sync list [options]                            List all syncable directories on drive
+    gdrive [global] sync content [options] &lt;fileId&gt;                List content of syncable directory
+    gdrive [global] sync download [options] &lt;fileId&gt; &lt;path&gt;        Sync drive directory to local directory
+    gdrive [global] sync upload [options] &lt;path&gt; &lt;fileId&gt;          Sync local directory to drive
+    gdrive [global] changes [options]                              List file changes
+    gdrive [global] revision list [options] &lt;fileId&gt;               List file revisions
+    gdrive [global] revision download [options] &lt;fileId&gt; &lt;revId&gt;   Download revision
+    gdrive [global] revision delete &lt;fileId&gt; &lt;revId&gt;               Delete file revision
+    gdrive [global] import [options] &lt;path&gt;                        Upload and convert file to a google document, see 'about import' for available conversions
+    gdrive [global] export [options] &lt;fileId&gt;                      Export a google document
+    gdrive [global] about [options]                                Google drive metadata, quota usage
+    gdrive [global] about import                                   Show supported import formats
+    gdrive [global] about export                                   Show supported export formats
+    gdrive version                                                 Print application version
+    gdrive help                                                    Print help
+    gdrive help &lt;command&gt;                                          Print command help
+    gdrive help &lt;command&gt; &lt;subcommand&gt;                             Print subcommand help
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="gdrive [global] list [options]                                 List files
+    gdrive [global] download [options] <fileId>                    Download file or directory
+    gdrive [global] download query [options] <query>               Download all files and directories matching query
+    gdrive [global] upload [options] <path>                        Upload file or directory
+    gdrive [global] upload - [options] <name>                      Upload file from stdin
+    gdrive [global] update [options] <fileId> <path>               Update file, this creates a new revision of the file
+    gdrive [global] info [options] <fileId>                        Show file info
+    gdrive [global] mkdir [options] <name>                         Create directory
+    gdrive [global] share [options] <fileId>                       Share file or directory
+    gdrive [global] share list <fileId>                            List files permissions
+    gdrive [global] share revoke <fileId> <permissionId>           Revoke permission
+    gdrive [global] delete [options] <fileId>                      Delete file or directory
+    gdrive [global] sync list [options]                            List all syncable directories on drive
+    gdrive [global] sync content [options] <fileId>                List content of syncable directory
+    gdrive [global] sync download [options] <fileId> <path>        Sync drive directory to local directory
+    gdrive [global] sync upload [options] <path> <fileId>          Sync local directory to drive
+    gdrive [global] changes [options]                              List file changes
+    gdrive [global] revision list [options] <fileId>               List file revisions
+    gdrive [global] revision download [options] <fileId> <revId>   Download revision
+    gdrive [global] revision delete <fileId> <revId>               Delete file revision
+    gdrive [global] import [options] <path>                        Upload and convert file to a google document, see 'about import' for available conversions
+    gdrive [global] export [options] <fileId>                      Export a google document
+    gdrive [global] about [options]                                Google drive metadata, quota usage
+    gdrive [global] about import                                   Show supported import formats
+    gdrive [global] about export                                   Show supported export formats
+    gdrive version                                                 Print application version
+    gdrive help                                                    Print help
+    gdrive help <command>                                          Print command help
+    gdrive help <command> <subcommand>                             Print subcommand help
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h2>
+    <a
+      id="user-content-examples"
+      class="anchor"
+      aria-hidden="true"
+      href="#examples"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Examples
+  </h2>
+  <h4>
+    <a
+      id="user-content-list-files-1"
+      class="anchor"
+      aria-hidden="true"
+      href="#list-files-1"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >List files
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive list
+    Id                             Name                    Type   Size     Created
+    0B3X9GlR6EmbnZ3gyeGw4d3ozbUk   drive-windows-x64.exe   bin    6.6 MB   2015-07-18 16:43:58
+    0B3X9GlR6EmbnTXlSc1FqV1dvSTQ   drive-windows-386.exe   bin    5.2 MB   2015-07-18 16:43:53
+    0B3X9GlR6EmbnVjIzMDRqck1aekE   drive-osx-x64           bin    6.5 MB   2015-07-18 16:43:50
+    0B3X9GlR6EmbnbEpXdlhza25zT1U   drive-osx-386           bin    5.2 MB   2015-07-18 16:43:41
+    0B3X9GlR6Embnb095MGxEYmJhY2c   drive-linux-x64         bin    6.5 MB   2015-07-18 16:43:38
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive list
+    Id                             Name                    Type   Size     Created
+    0B3X9GlR6EmbnZ3gyeGw4d3ozbUk   drive-windows-x64.exe   bin    6.6 MB   2015-07-18 16:43:58
+    0B3X9GlR6EmbnTXlSc1FqV1dvSTQ   drive-windows-386.exe   bin    5.2 MB   2015-07-18 16:43:53
+    0B3X9GlR6EmbnVjIzMDRqck1aekE   drive-osx-x64           bin    6.5 MB   2015-07-18 16:43:50
+    0B3X9GlR6EmbnbEpXdlhza25zT1U   drive-osx-386           bin    5.2 MB   2015-07-18 16:43:41
+    0B3X9GlR6Embnb095MGxEYmJhY2c   drive-linux-x64         bin    6.5 MB   2015-07-18 16:43:38
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-list-largest-files"
+      class="anchor"
+      aria-hidden="true"
+      href="#list-largest-files"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >List largest files
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive list --query "name contains 'gdrive'" --order "quotaBytesUsed desc" -m 3
+    Id                             Name                     Type   Size     Created
+    0B3X9GlR6EmbnZXpDRG1xblM2LTg   gdrive-linux-mips64      bin    8.5 MB   2016-02-22 21:07:04
+    0B3X9GlR6EmbnNW5CTV8xdFkxTjg   gdrive-linux-mips64le    bin    8.5 MB   2016-02-22 21:07:07
+    0B3X9GlR6EmbnZ1NGS25FdEVlWEk   gdrive-osx-x64           bin    8.3 MB   2016-02-21 20:22:13
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value='$ gdrive list --query "name contains &apos;gdrive&apos;" --order "quotaBytesUsed desc" -m 3
+    Id                             Name                     Type   Size     Created
+    0B3X9GlR6EmbnZXpDRG1xblM2LTg   gdrive-linux-mips64      bin    8.5 MB   2016-02-22 21:07:04
+    0B3X9GlR6EmbnNW5CTV8xdFkxTjg   gdrive-linux-mips64le    bin    8.5 MB   2016-02-22 21:07:07
+    0B3X9GlR6EmbnZ1NGS25FdEVlWEk   gdrive-osx-x64           bin    8.3 MB   2016-02-21 20:22:13
+    '
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-upload-file"
+      class="anchor"
+      aria-hidden="true"
+      href="#upload-file"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Upload file
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive upload gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Uploaded 0B3X9GlR6EmbnZ1NGS25FdEVlWEk at 3.8 MB/s, total 8.3 MB
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive upload gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Uploaded 0B3X9GlR6EmbnZ1NGS25FdEVlWEk at 3.8 MB/s, total 8.3 MB
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-make-directory"
+      class="anchor"
+      aria-hidden="true"
+      href="#make-directory"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Make directory
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive mkdir gdrive-bin
+    Directory 0B3X9GlR6EmbnY1RLVTk5VUtOVkk created
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive mkdir gdrive-bin
+    Directory 0B3X9GlR6EmbnY1RLVTk5VUtOVkk created
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-upload-file-to-directory"
+      class="anchor"
+      aria-hidden="true"
+      href="#upload-file-to-directory"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Upload file to directory
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive upload --parent 0B3X9GlR6EmbnY1RLVTk5VUtOVkk gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Uploaded 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E at 2.5 MB/s, total 8.3 MB
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive upload --parent 0B3X9GlR6EmbnY1RLVTk5VUtOVkk gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Uploaded 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E at 2.5 MB/s, total 8.3 MB
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-download-file"
+      class="anchor"
+      aria-hidden="true"
+      href="#download-file"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Download file
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive download 0B3X9GlR6EmbnZ1NGS25FdEVlWEk
+    Downloading gdrive-osx-x64 -&gt; gdrive-osx-x64
+    Downloaded 0B3X9GlR6EmbnZ1NGS25FdEVlWEk at 8.3 MB/s, total 8.3 MB
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive download 0B3X9GlR6EmbnZ1NGS25FdEVlWEk
+    Downloading gdrive-osx-x64 -> gdrive-osx-x64
+    Downloaded 0B3X9GlR6EmbnZ1NGS25FdEVlWEk at 8.3 MB/s, total 8.3 MB
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-share-a-file"
+      class="anchor"
+      aria-hidden="true"
+      href="#share-a-file"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Share a file
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive share 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Granted reader permission to anyone
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive share 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Granted reader permission to anyone
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-pipe-content-directly-to-google-drive"
+      class="anchor"
+      aria-hidden="true"
+      href="#pipe-content-directly-to-google-drive"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Pipe content directly to google drive
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ echo "Hello World" | gdrive upload - hello.txt
+    Uploading hello.txt
+    Uploaded 0B3X9GlR6EmbnaXVrOUpIcWlUS0E at 8.0 B/s, total 12.0 B
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value='$ echo "Hello World" | gdrive upload - hello.txt
+    Uploading hello.txt
+    Uploaded 0B3X9GlR6EmbnaXVrOUpIcWlUS0E at 8.0 B/s, total 12.0 B
+    '
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-print-file-to-stdout"
+      class="anchor"
+      aria-hidden="true"
+      href="#print-file-to-stdout"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Print file to stdout
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive download --stdout 0B3X9GlR6EmbnaXVrOUpIcWlUS0E
+    Hello World
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive download --stdout 0B3X9GlR6EmbnaXVrOUpIcWlUS0E
+    Hello World
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-get-file-info"
+      class="anchor"
+      aria-hidden="true"
+      href="#get-file-info"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Get file info
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive info 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Id: 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Name: gdrive-osx-x64
+    Path: gdrive-bin/gdrive-osx-x64
+    Mime: application/octet-stream
+    Size: 8.3 MB
+    Created: 2016-02-21 20:47:04
+    Modified: 2016-02-21 20:47:04
+    Md5sum: b607f29231a3b2d16098c4212516470f
+    Shared: True
+    Parents: 0B3X9GlR6EmbnY1RLVTk5VUtOVkk
+    ViewUrl: https://drive.google.com/file/d/0B3X9GlR6EmbnNTk0SkV0bm5Hd0E/view?usp=drivesdk
+    DownloadUrl: https://docs.google.com/uc?id=0B3X9GlR6EmbnNTk0SkV0bm5Hd0E&amp;export=download
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive info 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Id: 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Name: gdrive-osx-x64
+    Path: gdrive-bin/gdrive-osx-x64
+    Mime: application/octet-stream
+    Size: 8.3 MB
+    Created: 2016-02-21 20:47:04
+    Modified: 2016-02-21 20:47:04
+    Md5sum: b607f29231a3b2d16098c4212516470f
+    Shared: True
+    Parents: 0B3X9GlR6EmbnY1RLVTk5VUtOVkk
+    ViewUrl: https://drive.google.com/file/d/0B3X9GlR6EmbnNTk0SkV0bm5Hd0E/view?usp=drivesdk
+    DownloadUrl: https://docs.google.com/uc?id=0B3X9GlR6EmbnNTk0SkV0bm5Hd0E&amp;export=download
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-update-file-create-new-revision"
+      class="anchor"
+      aria-hidden="true"
+      href="#update-file-create-new-revision"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Update file (create new revision)
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive update 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Updated 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E at 2.0 MB/s, total 8.3 MB
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive update 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E gdrive-osx-x64
+    Uploading gdrive-osx-x64
+    Updated 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E at 2.0 MB/s, total 8.3 MB
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-list-file-revisions-1"
+      class="anchor"
+      aria-hidden="true"
+      href="#list-file-revisions-1"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >List file revisions
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive revision list 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Id                                                    Name             Size     Modified              KeepForever
+    0B3X9GlR6EmbnOFlHSTZQNWJWMGN2ckZucC9VaEUwczV1cUNrPQ   gdrive-osx-x64   8.3 MB   2016-02-21 20:47:04   False
+    0B3X9GlR6EmbndVEwMlZCUldGWUlPb2lTS25rOFo1L2t6c2ZVPQ   gdrive-osx-x64   8.3 MB   2016-02-21 21:12:09   False
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive revision list 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E
+    Id                                                    Name             Size     Modified              KeepForever
+    0B3X9GlR6EmbnOFlHSTZQNWJWMGN2ckZucC9VaEUwczV1cUNrPQ   gdrive-osx-x64   8.3 MB   2016-02-21 20:47:04   False
+    0B3X9GlR6EmbndVEwMlZCUldGWUlPb2lTS25rOFo1L2t6c2ZVPQ   gdrive-osx-x64   8.3 MB   2016-02-21 21:12:09   False
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-download-revision-1"
+      class="anchor"
+      aria-hidden="true"
+      href="#download-revision-1"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Download revision
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive revision download 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E 0B3X9GlR6EmbnOFlHSTZQNWJWMGN2ckZucC9VaEUwczV1cUNrPQ
+    Downloading gdrive-osx-x64 -&gt; gdrive-osx-x64
+    Download complete, rate: 8.3 MB/s, total size: 8.3 MB
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive revision download 0B3X9GlR6EmbnNTk0SkV0bm5Hd0E 0B3X9GlR6EmbnOFlHSTZQNWJWMGN2ckZucC9VaEUwczV1cUNrPQ
+    Downloading gdrive-osx-x64 -> gdrive-osx-x64
+    Download complete, rate: 8.3 MB/s, total size: 8.3 MB
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-export-google-doc-as-docx"
+      class="anchor"
+      aria-hidden="true"
+      href="#export-google-doc-as-docx"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Export google doc as docx
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive export --mime application/vnd.openxmlformats-officedocument.wordprocessingml.document 1Kt5A8X7X2RQrEi5t6Y9W1LayRc4hyrFiG63y2dIJEvk
+    Exported 'foo.docx' with mime type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive export --mime application/vnd.openxmlformats-officedocument.wordprocessingml.document 1Kt5A8X7X2RQrEi5t6Y9W1LayRc4hyrFiG63y2dIJEvk
+    Exported 'foo.docx' with mime type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-import-csv-as-google-spreadsheet"
+      class="anchor"
+      aria-hidden="true"
+      href="#import-csv-as-google-spreadsheet"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Import csv as google spreadsheet
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive import foo.csv
+    Imported 1mTl3DjIvap4tpTX_oMkDcbDT8ShtiGJRlozTfkXpeko with mime type: 'application/vnd.google-apps.spreadsheet'
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive import foo.csv
+    Imported 1mTl3DjIvap4tpTX_oMkDcbDT8ShtiGJRlozTfkXpeko with mime type: 'application/vnd.google-apps.spreadsheet'
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-syncing-directory-to-drive"
+      class="anchor"
+      aria-hidden="true"
+      href="#syncing-directory-to-drive"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >Syncing directory to drive
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code># Create directory on drive
+    $ gdrive mkdir drive-bin
+    Directory 0B3X9GlR6EmbnOEd6cEh6bU9XZWM created
+    
+    # Sync to drive
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 32 local files and 0 remote files
+    
+    6 remote directories are missing
+    [0001/0006] Creating directory drive-bin/bsd
+    [0002/0006] Creating directory drive-bin/linux
+    [0003/0006] Creating directory drive-bin/osx
+    [0004/0006] Creating directory drive-bin/plan9
+    [0005/0006] Creating directory drive-bin/solaris
+    [0006/0006] Creating directory drive-bin/windows
+    
+    26 remote files are missing
+    [0001/0026] Uploading bsd/gdrive-dragonfly-x64 -&gt; drive-bin/bsd/gdrive-dragonfly-x64
+    [0002/0026] Uploading bsd/gdrive-freebsd-386 -&gt; drive-bin/bsd/gdrive-freebsd-386
+    [0003/0026] Uploading bsd/gdrive-freebsd-arm -&gt; drive-bin/bsd/gdrive-freebsd-arm
+    [0004/0026] Uploading bsd/gdrive-freebsd-x64 -&gt; drive-bin/bsd/gdrive-freebsd-x64
+    [0005/0026] Uploading bsd/gdrive-netbsd-386 -&gt; drive-bin/bsd/gdrive-netbsd-386
+    [0006/0026] Uploading bsd/gdrive-netbsd-arm -&gt; drive-bin/bsd/gdrive-netbsd-arm
+    [0007/0026] Uploading bsd/gdrive-netbsd-x64 -&gt; drive-bin/bsd/gdrive-netbsd-x64
+    [0008/0026] Uploading bsd/gdrive-openbsd-386 -&gt; drive-bin/bsd/gdrive-openbsd-386
+    [0009/0026] Uploading bsd/gdrive-openbsd-arm -&gt; drive-bin/bsd/gdrive-openbsd-arm
+    [0010/0026] Uploading bsd/gdrive-openbsd-x64 -&gt; drive-bin/bsd/gdrive-openbsd-x64
+    [0011/0026] Uploading linux/gdrive-linux-386 -&gt; drive-bin/linux/gdrive-linux-386
+    [0012/0026] Uploading linux/gdrive-linux-arm -&gt; drive-bin/linux/gdrive-linux-arm
+    [0013/0026] Uploading linux/gdrive-linux-arm64 -&gt; drive-bin/linux/gdrive-linux-arm64
+    [0014/0026] Uploading linux/gdrive-linux-mips64 -&gt; drive-bin/linux/gdrive-linux-mips64
+    [0015/0026] Uploading linux/gdrive-linux-mips64le -&gt; drive-bin/linux/gdrive-linux-mips64le
+    [0016/0026] Uploading linux/gdrive-linux-ppc64 -&gt; drive-bin/linux/gdrive-linux-ppc64
+    [0017/0026] Uploading linux/gdrive-linux-ppc64le -&gt; drive-bin/linux/gdrive-linux-ppc64le
+    [0018/0026] Uploading linux/gdrive-linux-x64 -&gt; drive-bin/linux/gdrive-linux-x64
+    [0019/0026] Uploading osx/gdrive-osx-386 -&gt; drive-bin/osx/gdrive-osx-386
+    [0020/0026] Uploading osx/gdrive-osx-arm -&gt; drive-bin/osx/gdrive-osx-arm
+    [0021/0026] Uploading osx/gdrive-osx-x64 -&gt; drive-bin/osx/gdrive-osx-x64
+    [0022/0026] Uploading plan9/gdrive-plan9-386 -&gt; drive-bin/plan9/gdrive-plan9-386
+    [0023/0026] Uploading plan9/gdrive-plan9-x64 -&gt; drive-bin/plan9/gdrive-plan9-x64
+    [0024/0026] Uploading solaris/gdrive-solaris-x64 -&gt; drive-bin/solaris/gdrive-solaris-x64
+    [0025/0026] Uploading windows/gdrive-windows-386.exe -&gt; drive-bin/windows/gdrive-windows-386.exe
+    [0026/0026] Uploading windows/gdrive-windows-x64.exe -&gt; drive-bin/windows/gdrive-windows-x64.exe
+    Sync finished in 1m18.891946279s
+    
+    # Add new local file
+    $ echo "google drive binaries" &gt; _release/bin/readme.txt
+    
+    # Sync again
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 33 local files and 32 remote files
+    
+    1 remote files are missing
+    [0001/0001] Uploading readme.txt -&gt; drive-bin/readme.txt
+    Sync finished in 2.201339535s
+    
+    # Modify local file
+    $ echo "for all platforms" &gt;&gt; _release/bin/readme.txt
+    
+    # Sync again
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 33 local files and 33 remote files
+    
+    1 local files has changed
+    [0001/0001] Updating readme.txt -&gt; drive-bin/readme.txt
+    Sync finished in 1.890244258s
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value='# Create directory on drive
+    $ gdrive mkdir drive-bin
+    Directory 0B3X9GlR6EmbnOEd6cEh6bU9XZWM created
+    
+    # Sync to drive
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 32 local files and 0 remote files
+    
+    6 remote directories are missing
+    [0001/0006] Creating directory drive-bin/bsd
+    [0002/0006] Creating directory drive-bin/linux
+    [0003/0006] Creating directory drive-bin/osx
+    [0004/0006] Creating directory drive-bin/plan9
+    [0005/0006] Creating directory drive-bin/solaris
+    [0006/0006] Creating directory drive-bin/windows
+    
+    26 remote files are missing
+    [0001/0026] Uploading bsd/gdrive-dragonfly-x64 -> drive-bin/bsd/gdrive-dragonfly-x64
+    [0002/0026] Uploading bsd/gdrive-freebsd-386 -> drive-bin/bsd/gdrive-freebsd-386
+    [0003/0026] Uploading bsd/gdrive-freebsd-arm -> drive-bin/bsd/gdrive-freebsd-arm
+    [0004/0026] Uploading bsd/gdrive-freebsd-x64 -> drive-bin/bsd/gdrive-freebsd-x64
+    [0005/0026] Uploading bsd/gdrive-netbsd-386 -> drive-bin/bsd/gdrive-netbsd-386
+    [0006/0026] Uploading bsd/gdrive-netbsd-arm -> drive-bin/bsd/gdrive-netbsd-arm
+    [0007/0026] Uploading bsd/gdrive-netbsd-x64 -> drive-bin/bsd/gdrive-netbsd-x64
+    [0008/0026] Uploading bsd/gdrive-openbsd-386 -> drive-bin/bsd/gdrive-openbsd-386
+    [0009/0026] Uploading bsd/gdrive-openbsd-arm -> drive-bin/bsd/gdrive-openbsd-arm
+    [0010/0026] Uploading bsd/gdrive-openbsd-x64 -> drive-bin/bsd/gdrive-openbsd-x64
+    [0011/0026] Uploading linux/gdrive-linux-386 -> drive-bin/linux/gdrive-linux-386
+    [0012/0026] Uploading linux/gdrive-linux-arm -> drive-bin/linux/gdrive-linux-arm
+    [0013/0026] Uploading linux/gdrive-linux-arm64 -> drive-bin/linux/gdrive-linux-arm64
+    [0014/0026] Uploading linux/gdrive-linux-mips64 -> drive-bin/linux/gdrive-linux-mips64
+    [0015/0026] Uploading linux/gdrive-linux-mips64le -> drive-bin/linux/gdrive-linux-mips64le
+    [0016/0026] Uploading linux/gdrive-linux-ppc64 -> drive-bin/linux/gdrive-linux-ppc64
+    [0017/0026] Uploading linux/gdrive-linux-ppc64le -> drive-bin/linux/gdrive-linux-ppc64le
+    [0018/0026] Uploading linux/gdrive-linux-x64 -> drive-bin/linux/gdrive-linux-x64
+    [0019/0026] Uploading osx/gdrive-osx-386 -> drive-bin/osx/gdrive-osx-386
+    [0020/0026] Uploading osx/gdrive-osx-arm -> drive-bin/osx/gdrive-osx-arm
+    [0021/0026] Uploading osx/gdrive-osx-x64 -> drive-bin/osx/gdrive-osx-x64
+    [0022/0026] Uploading plan9/gdrive-plan9-386 -> drive-bin/plan9/gdrive-plan9-386
+    [0023/0026] Uploading plan9/gdrive-plan9-x64 -> drive-bin/plan9/gdrive-plan9-x64
+    [0024/0026] Uploading solaris/gdrive-solaris-x64 -> drive-bin/solaris/gdrive-solaris-x64
+    [0025/0026] Uploading windows/gdrive-windows-386.exe -> drive-bin/windows/gdrive-windows-386.exe
+    [0026/0026] Uploading windows/gdrive-windows-x64.exe -> drive-bin/windows/gdrive-windows-x64.exe
+    Sync finished in 1m18.891946279s
+    
+    # Add new local file
+    $ echo "google drive binaries" > _release/bin/readme.txt
+    
+    # Sync again
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 33 local files and 32 remote files
+    
+    1 remote files are missing
+    [0001/0001] Uploading readme.txt -> drive-bin/readme.txt
+    Sync finished in 2.201339535s
+    
+    # Modify local file
+    $ echo "for all platforms" >> _release/bin/readme.txt
+    
+    # Sync again
+    $ gdrive sync upload _release/bin 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Starting sync...
+    Collecting local and remote file information...
+    Found 33 local files and 33 remote files
+    
+    1 local files has changed
+    [0001/0001] Updating readme.txt -> drive-bin/readme.txt
+    Sync finished in 1.890244258s
+    '
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+  <h4>
+    <a
+      id="user-content-list-content-of-sync-directory"
+      class="anchor"
+      aria-hidden="true"
+      href="#list-content-of-sync-directory"
+      ><svg
+        class="octicon octicon-link"
+        viewBox="0 0 16 16"
+        version="1.1"
+        width="16"
+        height="16"
+        aria-hidden="true"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M7.775 3.275a.75.75 0 001.06 1.06l1.25-1.25a2 2 0 112.83 2.83l-2.5 2.5a2 2 0 01-2.83 0 .75.75 0 00-1.06 1.06 3.5 3.5 0 004.95 0l2.5-2.5a3.5 3.5 0 00-4.95-4.95l-1.25 1.25zm-4.69 9.64a2 2 0 010-2.83l2.5-2.5a2 2 0 012.83 0 .75.75 0 001.06-1.06 3.5 3.5 0 00-4.95 0l-2.5 2.5a3.5 3.5 0 004.95 4.95l1.25-1.25a.75.75 0 00-1.06-1.06l-1.25 1.25a2 2 0 01-2.83 0z"
+        ></path></svg></a
+    >List content of sync directory
+  </h4>
+  <div class="snippet-clipboard-content position-relative">
+    <pre><code>$ gdrive sync content 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Id                             Path                             Type   Size     Modified
+    0B3X9GlR6EmbnMldxMFV1UGVMTlE   bsd                              dir             2016-02-21 22:54:00
+    0B3X9GlR6EmbnM05sQ3hVUnJnOXc   bsd/gdrive-dragonfly-x64         bin    7.8 MB   2016-02-21 22:54:14
+    0B3X9GlR6EmbnVy1KXzA4dlU5RVE   bsd/gdrive-freebsd-386           bin    6.1 MB   2016-02-21 22:54:18
+    0B3X9GlR6Embnb29QQkFtSlRiZnc   bsd/gdrive-freebsd-arm           bin    6.1 MB   2016-02-21 22:54:20
+    0B3X9GlR6EmbnMkFQYVpSaHhHTXM   bsd/gdrive-freebsd-x64           bin    7.8 MB   2016-02-21 22:54:23
+    0B3X9GlR6EmbnVmJRMl9hUDloVU0   bsd/gdrive-netbsd-386            bin    6.1 MB   2016-02-21 22:54:25
+    0B3X9GlR6EmbnLVlTZWpxOEF4Q2s   bsd/gdrive-netbsd-arm            bin    6.1 MB   2016-02-21 22:54:28
+    0B3X9GlR6EmbnOENUZmh3anJmNG8   bsd/gdrive-netbsd-x64            bin    7.8 MB   2016-02-21 22:54:30
+    0B3X9GlR6EmbnWTRoQ2ZVQXRfQlU   bsd/gdrive-openbsd-386           bin    6.1 MB   2016-02-21 22:54:32
+    0B3X9GlR6EmbncEtlN3ZuQ0VUWms   bsd/gdrive-openbsd-arm           bin    6.1 MB   2016-02-21 22:54:35
+    0B3X9GlR6EmbnMlFLY1ptNEFyZWc   bsd/gdrive-openbsd-x64           bin    7.8 MB   2016-02-21 22:54:38
+    0B3X9GlR6EmbncGtSajQyNzloVEE   linux                            dir             2016-02-21 22:54:01
+    0B3X9GlR6EmbnMWVudkJmb1NZdmM   linux/gdrive-linux-386           bin    6.1 MB   2016-02-21 22:54:40
+    0B3X9GlR6Embnbnpla1R2VHV5T2M   linux/gdrive-linux-arm           bin    6.1 MB   2016-02-21 22:54:42
+    0B3X9GlR6EmbnM0s2cU1YWkNJSjA   linux/gdrive-linux-arm64         bin    7.7 MB   2016-02-21 22:54:45
+    0B3X9GlR6EmbnNU9NNi1TdDc4S2c   linux/gdrive-linux-mips64        bin    8.5 MB   2016-02-21 22:54:47
+    0B3X9GlR6EmbnSmdQNjRKZ2dWV1U   linux/gdrive-linux-mips64le      bin    8.5 MB   2016-02-21 22:54:50
+    0B3X9GlR6EmbnS0g0OVgxMHY5Z3c   linux/gdrive-linux-ppc64         bin    7.8 MB   2016-02-21 22:54:52
+    0B3X9GlR6EmbneVp6ZXRpR3FhWlU   linux/gdrive-linux-ppc64le       bin    7.8 MB   2016-02-21 22:54:54
+    0B3X9GlR6EmbnczdJT195dFVxdU0   linux/gdrive-linux-x64           bin    7.8 MB   2016-02-21 22:54:57
+    0B3X9GlR6EmbnTXZXeDRnSDdVS1E   osx                              dir             2016-02-21 22:54:02
+    0B3X9GlR6EmbnWnRheXJNR0pUMU0   osx/gdrive-osx-386               bin    6.6 MB   2016-02-21 22:54:59
+    0B3X9GlR6EmbnRzNqMWFXdDR1Rms   osx/gdrive-osx-arm               bin    6.6 MB   2016-02-21 22:55:01
+    0B3X9GlR6EmbnaDlVWTZDd0JIeEU   osx/gdrive-osx-x64               bin    8.3 MB   2016-02-21 22:55:04
+    0B3X9GlR6EmbnWW84UFBvbHlURXM   plan9                            dir             2016-02-21 22:54:02
+    0B3X9GlR6EmbnTmc0a2RNdDZDRUU   plan9/gdrive-plan9-386           bin    5.8 MB   2016-02-21 22:55:07
+    0B3X9GlR6EmbnT1pYZ2p4Sk9FVFk   plan9/gdrive-plan9-x64           bin    7.4 MB   2016-02-21 22:55:10
+    0B3X9GlR6EmbnbnZnXzlYVHoxdk0   readme.txt                       bin    40.0 B   2016-02-21 22:59:56
+    0B3X9GlR6EmbnSWF1QUlta3RnaGc   solaris                          dir             2016-02-21 22:54:03
+    0B3X9GlR6EmbnaWFOV0YxSGs5Znc   solaris/gdrive-solaris-x64       bin    7.7 MB   2016-02-21 22:55:13
+    0B3X9GlR6EmbnNE5ySkEzbWQ4Qms   windows                          dir             2016-02-21 22:54:03
+    0B3X9GlR6EmbnX1RIT2w1TWZYWFU   windows/gdrive-windows-386.exe   bin    6.1 MB   2016-02-21 22:55:15
+    0B3X9GlR6EmbndmVMU05POGRPS3c   windows/gdrive-windows-x64.exe   bin    7.8 MB   2016-02-21 22:55:18
+    </code></pre>
+    <div class="zeroclipboard-container position-absolute right-0 top-0">
+      <clipboard-copy
+        aria-label="Copy"
+        class="
+          ClipboardButton
+          btn
+          js-clipboard-copy
+          m-2
+          p-0
+          tooltipped-no-delay
+        "
+        data-copy-feedback="Copied!"
+        data-tooltip-direction="w"
+        value="$ gdrive sync content 0B3X9GlR6EmbnOEd6cEh6bU9XZWM
+    Id                             Path                             Type   Size     Modified
+    0B3X9GlR6EmbnMldxMFV1UGVMTlE   bsd                              dir             2016-02-21 22:54:00
+    0B3X9GlR6EmbnM05sQ3hVUnJnOXc   bsd/gdrive-dragonfly-x64         bin    7.8 MB   2016-02-21 22:54:14
+    0B3X9GlR6EmbnVy1KXzA4dlU5RVE   bsd/gdrive-freebsd-386           bin    6.1 MB   2016-02-21 22:54:18
+    0B3X9GlR6Embnb29QQkFtSlRiZnc   bsd/gdrive-freebsd-arm           bin    6.1 MB   2016-02-21 22:54:20
+    0B3X9GlR6EmbnMkFQYVpSaHhHTXM   bsd/gdrive-freebsd-x64           bin    7.8 MB   2016-02-21 22:54:23
+    0B3X9GlR6EmbnVmJRMl9hUDloVU0   bsd/gdrive-netbsd-386            bin    6.1 MB   2016-02-21 22:54:25
+    0B3X9GlR6EmbnLVlTZWpxOEF4Q2s   bsd/gdrive-netbsd-arm            bin    6.1 MB   2016-02-21 22:54:28
+    0B3X9GlR6EmbnOENUZmh3anJmNG8   bsd/gdrive-netbsd-x64            bin    7.8 MB   2016-02-21 22:54:30
+    0B3X9GlR6EmbnWTRoQ2ZVQXRfQlU   bsd/gdrive-openbsd-386           bin    6.1 MB   2016-02-21 22:54:32
+    0B3X9GlR6EmbncEtlN3ZuQ0VUWms   bsd/gdrive-openbsd-arm           bin    6.1 MB   2016-02-21 22:54:35
+    0B3X9GlR6EmbnMlFLY1ptNEFyZWc   bsd/gdrive-openbsd-x64           bin    7.8 MB   2016-02-21 22:54:38
+    0B3X9GlR6EmbncGtSajQyNzloVEE   linux                            dir             2016-02-21 22:54:01
+    0B3X9GlR6EmbnMWVudkJmb1NZdmM   linux/gdrive-linux-386           bin    6.1 MB   2016-02-21 22:54:40
+    0B3X9GlR6Embnbnpla1R2VHV5T2M   linux/gdrive-linux-arm           bin    6.1 MB   2016-02-21 22:54:42
+    0B3X9GlR6EmbnM0s2cU1YWkNJSjA   linux/gdrive-linux-arm64         bin    7.7 MB   2016-02-21 22:54:45
+    0B3X9GlR6EmbnNU9NNi1TdDc4S2c   linux/gdrive-linux-mips64        bin    8.5 MB   2016-02-21 22:54:47
+    0B3X9GlR6EmbnSmdQNjRKZ2dWV1U   linux/gdrive-linux-mips64le      bin    8.5 MB   2016-02-21 22:54:50
+    0B3X9GlR6EmbnS0g0OVgxMHY5Z3c   linux/gdrive-linux-ppc64         bin    7.8 MB   2016-02-21 22:54:52
+    0B3X9GlR6EmbneVp6ZXRpR3FhWlU   linux/gdrive-linux-ppc64le       bin    7.8 MB   2016-02-21 22:54:54
+    0B3X9GlR6EmbnczdJT195dFVxdU0   linux/gdrive-linux-x64           bin    7.8 MB   2016-02-21 22:54:57
+    0B3X9GlR6EmbnTXZXeDRnSDdVS1E   osx                              dir             2016-02-21 22:54:02
+    0B3X9GlR6EmbnWnRheXJNR0pUMU0   osx/gdrive-osx-386               bin    6.6 MB   2016-02-21 22:54:59
+    0B3X9GlR6EmbnRzNqMWFXdDR1Rms   osx/gdrive-osx-arm               bin    6.6 MB   2016-02-21 22:55:01
+    0B3X9GlR6EmbnaDlVWTZDd0JIeEU   osx/gdrive-osx-x64               bin    8.3 MB   2016-02-21 22:55:04
+    0B3X9GlR6EmbnWW84UFBvbHlURXM   plan9                            dir             2016-02-21 22:54:02
+    0B3X9GlR6EmbnTmc0a2RNdDZDRUU   plan9/gdrive-plan9-386           bin    5.8 MB   2016-02-21 22:55:07
+    0B3X9GlR6EmbnT1pYZ2p4Sk9FVFk   plan9/gdrive-plan9-x64           bin    7.4 MB   2016-02-21 22:55:10
+    0B3X9GlR6EmbnbnZnXzlYVHoxdk0   readme.txt                       bin    40.0 B   2016-02-21 22:59:56
+    0B3X9GlR6EmbnSWF1QUlta3RnaGc   solaris                          dir             2016-02-21 22:54:03
+    0B3X9GlR6EmbnaWFOV0YxSGs5Znc   solaris/gdrive-solaris-x64       bin    7.7 MB   2016-02-21 22:55:13
+    0B3X9GlR6EmbnNE5ySkEzbWQ4Qms   windows                          dir             2016-02-21 22:54:03
+    0B3X9GlR6EmbnX1RIT2w1TWZYWFU   windows/gdrive-windows-386.exe   bin    6.1 MB   2016-02-21 22:55:15
+    0B3X9GlR6EmbndmVMU05POGRPS3c   windows/gdrive-windows-x64.exe   bin    7.8 MB   2016-02-21 22:55:18
+    "
+        tabindex="0"
+        role="button"
+      >
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="octicon octicon-clippy js-clipboard-clippy-icon m-2"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M5.75 1a.75.75 0 00-.75.75v3c0 .414.336.75.75.75h4.5a.75.75 0 00.75-.75v-3a.75.75 0 00-.75-.75h-4.5zm.75 3V2.5h3V4h-3zm-2.874-.467a.75.75 0 00-.752-1.298A1.75 1.75 0 002 3.75v9.5c0 .966.784 1.75 1.75 1.75h8.5A1.75 1.75 0 0014 13.25v-9.5a1.75 1.75 0 00-.874-1.515.75.75 0 10-.752 1.298.25.25 0 01.126.217v9.5a.25.25 0 01-.25.25h-8.5a.25.25 0 01-.25-.25v-9.5a.25.25 0 01.126-.217z"
+          ></path>
+        </svg>
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 16 16"
+          version="1.1"
+          data-view-component="true"
+          height="16"
+          width="16"
+          class="
+            octicon octicon-check
+            js-clipboard-check-icon
+            color-text-success
+            d-none
+            m-2
+          "
+        >
+          <path
+            fill-rule="evenodd"
+            d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"
+          ></path>
+        </svg>
+      </clipboard-copy>
+    </div>
+  </div>
+</article>
+
+
+
+
   </body>
 </html>
